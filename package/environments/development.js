@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const Base = require('./base')
 const devServer = require('../dev_server')
 const { outputPath: contentBase, publicPath } = require('../config')
@@ -8,7 +7,9 @@ module.exports = class extends Base {
     super()
 
     if (devServer.hmr) {
-      this.plugins.append('HotModuleReplacement', new webpack.HotModuleReplacementPlugin())
+      // NOTE: next line is not needed if starting the server with `--hot` option
+      // https://webpack.js.org/configuration/dev-server/#devserverhot
+      // this.plugins.append('HotModuleReplacement', new webpack.HotModuleReplacementPlugin())
       this.config.output.filename = '[name]-[hash].js'
     }
 
